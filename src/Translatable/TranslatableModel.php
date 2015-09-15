@@ -13,8 +13,14 @@ use panopla\Translatable\Exceptions\TranslatableModelNonExistentException;
 trait TranslatableModel
 {
 
+    /**
+     * @var array
+     */
     protected $translatable_attributes = [];
 
+    /**
+     * @var bool
+     */
     protected $translatable_updated = false;
 
     public static function boot()
@@ -67,6 +73,10 @@ trait TranslatableModel
 
     }
 
+    /**
+     * @throws NotEloquentModelException
+     * @throws TranslatableModelNonExistentException
+     */
     protected function processPendingAttributes()
     {
         foreach ($this->translatable_attributes as $language_id => $attributes) {
@@ -82,7 +92,7 @@ trait TranslatableModel
 
     /**
      * @param $languageCode
-     * @return mixed
+     * @return Model
      * @throws NotEloquentModelException
      * @throws TranslatableModelNonExistentException
      */
@@ -108,6 +118,10 @@ trait TranslatableModel
         return $result;
     }
 
+    /**
+     * @param array $attributes
+     * @param $languageCode
+     */
     private function appendTranslatableAttributes(array $attributes, $languageCode)
     {
         if (!$languageCode) {
