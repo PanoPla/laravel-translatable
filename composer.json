@@ -1,5 +1,5 @@
 {
-  "name": "bitspacedevelopment/laravel-translatable",
+  "name": "panopla/laravel-translatable",
   "description": "A laravel package to support translatable eloquent models.",
   "require": {
     "php": "^5.4",
@@ -17,7 +17,7 @@
       "": "src"
     },
     "psr-4": {
-      "bitspacedevelopment\\Translatable\\": "src/Translatable/"
+      "panopla\\Translatable\\": "src/Translatable/"
     }
   },
   "license": "MIT License",
