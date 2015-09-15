@@ -2,7 +2,7 @@
   "name": "panopla/laravel-translatable",
   "description": "A laravel package to support translatable eloquent models.",
   "require": {
-    "php": "^5.4",
+    "php": "^5.5",
     "illuminate/support": "~5.0",
     "illuminate/database": "~5.0"
   },
