@@ -3,7 +3,8 @@
   "description": "A laravel package to support translatable eloquent models.",
   "require": {
     "php": "^5.4",
-    "illuminate/support": "~5.0"
+    "illuminate/support": "~5.0",
+    "illuminate/database": "~5.0"
   },
   "require-dev": {
     "phpspec/phpspec": "^2.3"
@@ -14,6 +15,9 @@
   "autoload": {
     "psr-0": {
       "": "src"
+    },
+    "psr-4": {
+      "bitspacedevelopment\\Translatable\\": "src/Translatable/"
     }
   },
   "license": "MIT License",
