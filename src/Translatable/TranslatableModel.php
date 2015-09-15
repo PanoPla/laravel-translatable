@@ -2,9 +2,6 @@
 
 namespace panopla\Translatable;
 
-use panopla\Translatable\Language;
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class TranslatableModel
  * @package panopla\Translatable
@@ -19,15 +16,15 @@ trait TranslatableModel
     public static function boot()
     {
 
-        static::created(function (Model $model) {
+        static::created(function (TranslatableInterface $model) {
             $model->processPendingAttributes();
         });
 
-        static::updated(function (Model $model) {
+        static::updated(function (TranslatableInterface $model) {
             $model->processPendingAttributes();
         });
 
-        static::saved(function (Model $model) {
+        static::saved(function (TranslatableInterface $model) {
             $model->processPendingAttributes();
         });
 
