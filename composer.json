@@ -1,0 +1,26 @@
+{
+  "name": "bitspacedevelopment/laravel-translatable",
+  "description": "A laravel package to support translatable eloquent models.",
+  "require": {
+    "php": "^5.4",
+    "illuminate/support": "~5.0"
+  },
+  "require-dev": {
+    "phpspec/phpspec": "^2.3"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "autoload": {
+    "psr-0": {
+      "": "src"
+    }
+  },
+  "license": "MIT License",
+  "authors": [
+    {
+      "name": "Reuel Ramos Ribeiro",
+      "email": "rulrok@gmail.com"
+    }
+  ]
+}
