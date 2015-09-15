@@ -2,6 +2,9 @@
 
 namespace panopla\Translatable;
 
+use Illuminate\Database\Eloquent\Model;
+use panopla\Translatable\Exceptions\NotEloquentModelException;
+
 /**
  * Class TranslatableModel
  * @package panopla\Translatable
@@ -76,9 +79,20 @@ trait TranslatableModel
         $this->translatable_updated = true;
     }
 
+    /**
+     * @param $languageCode
+     * @return mixed
+     * @throws NotEloquentModelException
+     */
     private function obtainTextModel($languageCode)
     {
-        $sClassName = (new \ReflectionClass($this))->getName();
+        $reflectionClass = new \ReflectionClass($this);
+
+        if (!$reflectionClass->isSubclassOf(Model::class)) {
+            throw new NotEloquentModelException;
+        }
+
+        $sClassName = $reflectionClass->getName();
         $sClassName .= 'Text';
 
         //Yet a model has many translations for different languages,
