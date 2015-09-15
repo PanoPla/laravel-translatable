@@ -4,6 +4,7 @@ namespace panopla\Translatable;
 
 use Illuminate\Database\Eloquent\Model;
 use panopla\Translatable\Exceptions\NotEloquentModelException;
+use panopla\Translatable\Exceptions\TranslatableModelNonExistentException;
 
 /**
  * Class TranslatableModel
@@ -83,6 +84,7 @@ trait TranslatableModel
      * @param $languageCode
      * @return mixed
      * @throws NotEloquentModelException
+     * @throws TranslatableModelNonExistentException
      */
     private function obtainTextModel($languageCode)
     {
@@ -92,12 +94,16 @@ trait TranslatableModel
             throw new NotEloquentModelException;
         }
 
-        $sClassName = $reflectionClass->getName();
-        $sClassName .= 'Text';
+        $sTranslatableClassName = $reflectionClass->getName();
+        $sTranslatableClassName .= 'Text';
+
+        if (!class_exists($sTranslatableClassName)) {
+            throw new TranslatableModelNonExistentException;
+        }
 
         //Yet a model has many translations for different languages,
         //there is only one line for each language ( or so it should be :) )
-        $result = $this->hasMany($sClassName)->firstOrNew(['language_id' => $languageCode]);
+        $result = $this->hasMany($sTranslatableClassName)->firstOrNew(['language_id' => $languageCode]);
 
         return $result;
     }
