@@ -3,6 +3,8 @@
 namespace panopla\Translatable\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
+use panopla\Translatable\Language;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -40,7 +42,28 @@ class AddDatabaseLanguage extends Command
      */
     public function fire()
     {
-        //
+        $code = $this->option('code');
+
+        if (!$this->validateCode($code)) {
+            $this->error('Code is not in a valid format');
+            return;
+        }
+
+        $name = $this->option('name');
+
+        if (!$this->validateName($name)) {
+            $this->error('Name is not a valid string');
+            return;
+        }
+
+        DB::beginTransaction();
+        $language = new Language();
+        $language->code = $code;
+        $language->name = $name;
+        $language->save();
+        DB::commit();
+
+        $this->info('Language created successfully');
     }
 
     /**
@@ -66,4 +89,23 @@ class AddDatabaseLanguage extends Command
             ['name', null, InputOption::VALUE_REQUIRED, 'An example option.', null],
         ];
     }
+
+    /**
+     * @param $code
+     * @return bool
+     */
+    private function validateCode($code)
+    {
+        return true;
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    private function validateName($name)
+    {
+        return true;
+    }
+
 }
