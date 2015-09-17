@@ -2,8 +2,10 @@
 
 return [
 
+    'languages' => ['en', 'pt-BR'],
+
     'fallback' => 'en',
 
-    'language_table' => 'language'
+    'language_table' => 'language',
 
 ];
