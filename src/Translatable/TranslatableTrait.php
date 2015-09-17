@@ -7,10 +7,10 @@ use panopla\Translatable\Exceptions\NotEloquentModelException;
 use panopla\Translatable\Exceptions\TranslatableModelNonExistentException;
 
 /**
- * Class TranslatableModel
+ * Class TranslatableTrait
  * @package panopla\Translatable
  */
-trait TranslatableModel
+trait TranslatableTrait
 {
 
     /**
