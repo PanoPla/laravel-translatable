@@ -41,34 +41,34 @@ trait TranslatableTrait
     }
 
     /**
-     * @param $text
+     * @param $attribute
      * @param $languageCode
      * @return string
      */
-    protected function getTranslatableAttribute($text, $languageCode)
+    protected function getTranslatableAttribute($attribute, $languageCode)
     {
 
-        if (!$this->translatable_updated && isset($this->translatable_attributes[$languageCode][$text])) {
-            return $this->translatable_attributes[$languageCode][$text];
+        if (!$this->translatable_updated && isset($this->translatable_attributes[$languageCode][$attribute])) {
+            return $this->translatable_attributes[$languageCode][$attribute];
         }
 
         $model = $this->obtainTextModel($languageCode);
 
-        return $model->$text;
+        return $model->$attribute;
 
     }
 
     /**
-     * @param $text
+     * @param $attribute
      * @param null $value
      * @param $languageCode
      */
-    protected function setTranslatableAttribute($text, $value, $languageCode)
+    protected function setTranslatableAttribute($attribute, $value, $languageCode)
     {
-        if (is_array($text)) {
-            $this->appendTranslatableAttributes($text, $value);
+        if (is_array($attribute)) {
+            $this->appendTranslatableAttributes($attribute, $value);
         } else {
-            $this->appendTranslatableAttributes([$text => $value], $languageCode);
+            $this->appendTranslatableAttributes([$attribute => $value], $languageCode);
         }
 
     }
