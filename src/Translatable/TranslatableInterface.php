@@ -5,9 +5,9 @@ namespace panopla\Translatable;
 interface TranslatableInterface
 {
 
-    function getTranslatableAttribute();
+    function getTranslatableAttribute($attribute, $languageCode = null);
 
-    function setTranslatableAttribute();
+    function setTranslatableAttribute($attribute, $value, $languageCode = null);
 
     function processPendingAttributes();
 }
