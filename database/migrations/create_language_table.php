@@ -13,7 +13,8 @@ class CreateLanguageTable extends Migration
      */
     public function up()
     {
-        Schema::create('language', function (Blueprint $table) {
+        $table = \Illuminate\Support\Facades\Config::get('translatable.language_table', 'language');
+        Schema::create($table, function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('code', 10);
