@@ -9,8 +9,13 @@ use Illuminate\Support\Facades\Session;
 class Language extends Model
 {
 
-    protected $table = 'language';
     public $timestamps = false;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->table = Config::get('translatable.language_table', 'language');
+    }
 
     /**
      * Getter and setter function for the current session language

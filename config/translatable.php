@@ -2,6 +2,8 @@
 
 return [
 
-    'fallback' => 'en'
+    'fallback' => 'en',
+
+    'language_table' => 'language'
 
 ];
