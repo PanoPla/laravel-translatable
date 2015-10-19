@@ -19,32 +19,37 @@ class Language extends Model
     }
 
     /**
-     * Define the current session language.
+     * Getter/setter for session language.
      *
-     * @param $code
-     * @return mixed
+     * @param $code string If null, the actual language is returned.
+     * Otherwise, try to set the actual $code as the session language.
+     * @return string The actual session language
      * @throws InvalidLanguageCode If the language is not specified on the configuration file
      */
-    public static function setSessionLanguage($code)
+    public static function sessionLanguage($code)
     {
-        $allowed = static::validateLanguageCode($code);
+        $session_parameter = Config::get('translatable.session_parameter', 'language');
 
-        if (!$allowed) {
-            throw new InvalidLanguageCode;
+        if (isset($code)) {
+            //Setter
+            $allowed = static::validateLanguageCode($code);
+
+
+            if (!$allowed) {
+                throw new InvalidLanguageCode;
+            }
+
+            Session::put($session_parameter, $code);
+
+            return Session::get($session_parameter);
+        } else {
+            //Getter
+            if (Session::has('language')) {
+                return Session::get($session_parameter);
+            }
+
+            return self::getFallback();
         }
-
-        Session::put('language', $code);
-
-        return Session::get('language');
-    }
-
-    public static function getSessionLanguage()
-    {
-        if (Session::has('language')) {
-            return Session::get('language');
-        }
-
-        return self::getFallback();
     }
 
     public static function getFallback()

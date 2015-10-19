@@ -8,4 +8,6 @@ return [
 
     'language_table' => 'language',
 
+    'session_parameter' => 'language'
+
 ];
