@@ -48,11 +48,11 @@ class Language extends Model
                 return Session::get($session_parameter);
             }
 
-            return self::getFallback();
+            return self::fallbackLanguage();
         }
     }
 
-    public static function getFallback()
+    public static function fallbackLanguage()
     {
         return Config::get('translatable.fallback');
     }

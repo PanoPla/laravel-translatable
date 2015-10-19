@@ -125,7 +125,7 @@ trait TranslatableTrait
     private function appendTranslatableAttributes(array $attributes, $languageCode)
     {
         if (!$languageCode) {
-            $languageCode = Language::getFallback();
+            $languageCode = Language::fallbackLanguage();
         }
 
         $this->translatable_updated = false;
