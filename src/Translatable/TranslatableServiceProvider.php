@@ -10,11 +10,15 @@ class TranslatableServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/translatable.php' => config_path('translatable.php'), 'config'
+            __DIR__ . '/../../config/translatable.php' =>
+                config_path('translatable.php')
+            , 'config'
         ]);
 
         $this->publishes([
-            __DIR__ . '/../migrations/create_language_table' => database_path('/migrations/' . date('Y_m_d_His_')), 'migrations'
+            __DIR__ . '/../../migrations/create_language_table.php' =>
+                database_path('migrations/' . date('Y_m_d_His_') . 'create_language_table.php')
+            , 'migrations'
         ]);
     }
 
