@@ -16,7 +16,7 @@ class TranslatableServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__ . '/../../migrations/create_language_table.php' =>
+            __DIR__ . '/../../database/migrations/create_language_table.php' =>
                 database_path('migrations/' . date('Y_m_d_His_') . 'create_language_table.php')
             , 'migrations'
         ]);
@@ -30,7 +30,7 @@ class TranslatableServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/translatable.php', 'translatable'
+            __DIR__ . '/../../config/translatable.php', 'translatable'
         );
     }
 }
