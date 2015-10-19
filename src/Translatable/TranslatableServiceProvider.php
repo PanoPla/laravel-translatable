@@ -4,7 +4,7 @@ namespace panopla\Translatable;
 
 use Illuminate\Support\ServiceProvider;
 
-class TranlatableServiceProvider extends ServiceProvider
+class TranslatableServiceProvider extends ServiceProvider
 {
 
     public function boot()
