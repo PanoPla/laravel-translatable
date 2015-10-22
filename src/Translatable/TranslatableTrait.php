@@ -53,6 +53,10 @@ trait TranslatableTrait
     protected function getTranslatableAttribute($attribute, $languageCode)
     {
 
+        if (!$this->isAttributeAllowed($attribute)){
+            return $this->$attribute;
+        }
+
         /*
          * Even if we have set the attribute but not saved the model yet, return it since it is the most actual.
          */
@@ -73,6 +77,15 @@ trait TranslatableTrait
      */
     protected function setTranslatableAttribute($attribute, $value, $languageCode)
     {
+        /*
+         * If the attribute is not allowed to be translated, just try to update the model basis attribute
+         * instead of its translatable counterpart.
+         */
+        if (!$this->isAttributeAllowed($attribute)){
+            $this->$attribute = $value;
+            return;
+        }
+
         if (is_array($attribute)) {
             $this->appendTranslatableAttributes($attribute, $value);
         } else {
@@ -142,6 +155,15 @@ trait TranslatableTrait
         }
 
         $this->pendingTranslatableAttributes[$languageCode] = array_merge($this->pendingTranslatableAttributes[$languageCode], $attributes);
+    }
+
+    /**
+     * @param $attribute
+     * @return bool
+     */
+    private function isAttributeAllowed($attribute)
+    {
+        return (isset($this->pendingTranslatableAttributes[$attribute]));
     }
 
 }
