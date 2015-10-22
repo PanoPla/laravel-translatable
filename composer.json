@@ -1,6 +1,11 @@
 {
   "name": "panopla/laravel-translatable",
   "description": "A laravel package to support translatable eloquent models.",
+  "keywords": [
+    "laravel",
+    "translation",
+    "laravel 5"
+  ],
   "require": {
     "php": "^5.5",
     "illuminate/support": "~5.0",
@@ -8,7 +13,8 @@
     "illuminate/console": "~5.0"
   },
   "require-dev": {
-    "phpspec/phpspec": "^2.3"
+    "phpspec/phpspec": "^2.3",
+    "phpunit/phpunit": "4.8.*"
   },
   "config": {
     "bin-dir": "bin"
