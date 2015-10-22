@@ -14,14 +14,19 @@ trait TranslatableTrait
 {
 
     /**
+     * @var array Define the properties that are allowed to be translated on the model.
+     */
+    protected $translatable = ['*'];
+
+    /**
      * @var array
      */
-    protected $translatable_attributes = [];
+    private $pendingTranslatableAttributes = [];
 
     /**
      * @var bool
      */
-    protected $translatable_updated = false;
+    protected $translatableUpdated = false;
 
     public static function boot()
     {
@@ -48,8 +53,11 @@ trait TranslatableTrait
     protected function getTranslatableAttribute($attribute, $languageCode)
     {
 
-        if (!$this->translatable_updated && isset($this->translatable_attributes[$languageCode][$attribute])) {
-            return $this->translatable_attributes[$languageCode][$attribute];
+        /*
+         * Even if we have set the attribute but not saved the model yet, return it since it is the most actual.
+         */
+        if (!$this->translatableUpdated && isset($this->pendingTranslatableAttributes[$languageCode][$attribute])) {
+            return $this->pendingTranslatableAttributes[$languageCode][$attribute];
         }
 
         $model = $this->obtainTextModel($languageCode);
@@ -79,7 +87,7 @@ trait TranslatableTrait
      */
     protected function processPendingAttributes()
     {
-        foreach ($this->translatable_attributes as $language_id => $attributes) {
+        foreach ($this->pendingTranslatableAttributes as $language_id => $attributes) {
 
             $model = $this->obtainTextModel($language_id);
             $model->fill($attributes);
@@ -87,7 +95,7 @@ trait TranslatableTrait
             $model->save();
         }
 
-        $this->translatable_updated = true;
+        $this->translatableUpdated = true;
     }
 
     /**
@@ -128,12 +136,12 @@ trait TranslatableTrait
             $languageCode = Language::fallbackLanguage();
         }
 
-        $this->translatable_updated = false;
-        if (!isset($this->translatable_attributes[$languageCode])) {
-            $this->translatable_attributes[$languageCode] = [];
+        $this->translatableUpdated = false;
+        if (!isset($this->pendingTranslatableAttributes[$languageCode])) {
+            $this->pendingTranslatableAttributes[$languageCode] = [];
         }
 
-        $this->translatable_attributes[$languageCode] = array_merge($this->translatable_attributes[$languageCode], $attributes);
+        $this->pendingTranslatableAttributes[$languageCode] = array_merge($this->pendingTranslatableAttributes[$languageCode], $attributes);
     }
 
 }
