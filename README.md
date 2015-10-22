@@ -1,0 +1,3 @@
+# laravel-translatable
+
+ReadMe file coming soon...
