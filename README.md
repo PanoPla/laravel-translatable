@@ -50,13 +50,17 @@ $user->bio = "Usando Português agora para a minha bio";
 Add this following line to your `providers` list
 
 ```php
-panopla\Translatable\TranslatableServiceProvider::class,
+'providers' => [
+    panopla\Translatable\TranslatableServiceProvider::class,
+]
 ```
 
 And this for the `aliases` section
 
 ```php
-'Language'  => \panopla\Translatable\Facades\Language::class,
+'aliases' => [
+    'Language'  => panopla\Translatable\Facades\Language::class,
+]
 ```
 
 ## Using on your classes
