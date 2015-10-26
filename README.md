@@ -47,10 +47,16 @@ $user->bio = "Usando Português agora para a minha bio";
 
 ## Setup
 
-Add this following line to your application service providers list
+Add this following line to your `providers` list
 
 ```php
 panopla\Translatable\TranslatableServiceProvider::class,
+```
+
+And this for the `aliases` section
+
+```php
+'Language'  => \panopla\Translatable\Facades\Language::class,
 ```
 
 ## Using on your classes
@@ -73,6 +79,9 @@ Schema::create('product', function (Blueprint $table) {
 
 ### Main model class
 
+
+We are making usage of the `TranslatableInterface` php interface here in case you'd like
+to program to an interface
 ```php
 <?php namespace App;
 
