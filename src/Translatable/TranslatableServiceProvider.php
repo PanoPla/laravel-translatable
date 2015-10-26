@@ -3,6 +3,7 @@
 namespace panopla\Translatable;
 
 use Illuminate\Support\ServiceProvider;
+use panopla\Translatable\Facades\Language;
 
 class TranslatableServiceProvider extends ServiceProvider
 {
@@ -35,5 +36,9 @@ class TranslatableServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/../config/translatable.php', 'translatable'
         );
+
+        $this->app->singleton('translatable', function ($app) {
+            return new Language();
+        });
     }
 }
