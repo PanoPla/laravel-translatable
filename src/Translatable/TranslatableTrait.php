@@ -50,7 +50,7 @@ trait TranslatableTrait
      * @param $languageCode
      * @return string
      */
-    protected function getTranslatableAttribute($attribute, $languageCode)
+    protected function getTranslatableAttribute($attribute, $languageCode = null)
     {
 
         if (!$this->isAttributeAllowed($attribute)){
@@ -75,7 +75,7 @@ trait TranslatableTrait
      * @param null $value
      * @param $languageCode
      */
-    protected function setTranslatableAttribute($attribute, $value, $languageCode)
+    protected function setTranslatableAttribute($attribute, $value, $languageCode = null)
     {
         /*
          * If the attribute is not allowed to be translated, just try to update the model basis attribute
