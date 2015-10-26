@@ -38,7 +38,7 @@ class TranslatableServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton('translatable', function ($app) {
-            return new Language();
+            return new Translatable;
         });
     }
 }
