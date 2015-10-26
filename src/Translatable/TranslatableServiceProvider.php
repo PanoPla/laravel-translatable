@@ -3,7 +3,6 @@
 namespace panopla\Translatable;
 
 use Illuminate\Support\ServiceProvider;
-use panopla\Translatable\Facades\Language;
 
 class TranslatableServiceProvider extends ServiceProvider
 {
