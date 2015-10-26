@@ -11,11 +11,11 @@ class Translatable
      * @return string The actual session language
      * @throws InvalidLanguageCode If the language is not specified on the configuration file
      */
-    public static function sessionLanguage($code)
+    public static function sessionLanguage($code = null)
     {
         $session_parameter = Config::get('translatable.session_parameter', 'language');
 
-        if (isset($code)) {
+        if (!is_null($code)) {
             //Setter
             $allowed = static::validateLanguageCode($code);
 
